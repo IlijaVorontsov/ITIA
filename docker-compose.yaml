@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+    mosquitto:
+        image: eclipse-mosquitto:latest
+        restart: unless-stopped
+        ports:
+            - 1883:1883
+        volumes:
+            - ./mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+        
+    influxdb:
+        image: influxdb:latest
+        restart: unless-stopped
+        ports:
+            - 8086:8086
+        volumes:
+            - ./influxdb-data:/var/lib/influxdb2
+        
+    telegraf:
+        image: telegraf:latest
+        restart: unless-stopped
+        volumes:
+            - ./telegraf.conf:/etc/telegraf/telegraf.conf
+        links:
+            - influxdb
+            - mosquitto
+        depends_on:
+            - influxdb
+            - mosquitto
+
+

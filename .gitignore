@@ -1,0 +1,7 @@
+bin
+include
+influxdb-data
+lib
+lib64
+pyvenv.cfg
+.DS_Store
