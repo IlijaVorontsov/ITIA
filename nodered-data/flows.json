@@ -1,0 +1,131 @@
+[
+    {
+        "id": "2edc2a1f34f0a90d",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "65e900dd1adb3062",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mosquitto",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "df50f28fbe15daeb",
+        "type": "mqtt in",
+        "z": "2edc2a1f34f0a90d",
+        "name": "",
+        "topic": "#",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "65e900dd1adb3062",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 450,
+        "y": 180,
+        "wires": [
+            [
+                "c657d66c2b5b07b6"
+            ]
+        ]
+    },
+    {
+        "id": "c73a4200209b2d1d",
+        "type": "debug",
+        "z": "2edc2a1f34f0a90d",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "c657d66c2b5b07b6",
+        "type": "function",
+        "z": "2edc2a1f34f0a90d",
+        "name": "function 1",
+        "func": "const d = new Date();\nlet text = d.getDate() + \".\" + d.getMonth() + \".\" + d.getFullYear() + \" \" + d.getHours() + \":\" + d.getMinutes() + \":\" + d.getSeconds();\nreturn {payload: text + \"\\tTopic: \" + msg.topic + \" Payload: \" + msg.payload };",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 180,
+        "wires": [
+            [
+                "c73a4200209b2d1d",
+                "64b0091cc4d890cc"
+            ]
+        ]
+    },
+    {
+        "id": "64b0091cc4d890cc",
+        "type": "file",
+        "z": "2edc2a1f34f0a90d",
+        "name": "",
+        "filename": "/mqtt_log/mqtt_log",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "ascii",
+        "x": 810,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "51a263bec56867d7",
+        "type": "mqtt in",
+        "z": "2edc2a1f34f0a90d",
+        "name": "",
+        "topic": "itia/Station1/events/uptime",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "65e900dd1adb3062",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 510,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    }
+]

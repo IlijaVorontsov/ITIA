@@ -30,3 +30,18 @@ services:
             - mosquitto
 
 
+    node-red:
+        image: nodered/node-red:latest
+        container_name: node-red
+        environment:
+        - TZ=Europe/Berlin
+        ports:
+        - 49154:1880
+        volumes:
+        - ./nodered-data:/data
+        - ./mqtt_log:/mqtt_log
+        user: root:root
+        links:
+            - mosquitto
+        depends_on:
+            - mosquitto
